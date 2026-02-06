@@ -13,8 +13,8 @@ Claude Code plugins by Florin.
 ### From marketplace
 
 ```
-/plugin marketplace add florinutz/claude-plugins
-/plugin install narra@claude-plugins
+/plugin marketplace add florinutz/flo-marketplace
+/plugin install narra@flo-marketplace
 ```
 
 ### Manual (single plugin)
