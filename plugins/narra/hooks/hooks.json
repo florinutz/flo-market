@@ -1,0 +1,17 @@
+{
+  "description": "Narra session hooks for context awareness",
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '[Narra] World state available. Use narra MCP tools: query, mutate, session, export_world, generate_graph'",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
+}

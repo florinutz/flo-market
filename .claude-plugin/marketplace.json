@@ -1,0 +1,14 @@
+{
+  "name": "claude-plugins",
+  "owner": { "name": "Florin" },
+  "metadata": {
+    "description": "claude-code plugins by Florin"
+  },
+  "plugins": [
+    {
+      "name": "narra",
+      "source": "./plugins/narra",
+      "description": "Narrative intelligence engine — semantic search, arc tracking, perspective vectors for story worlds"
+    }
+  ]
+}
