@@ -1,27 +1,42 @@
 ---
 name: narra:status
-description: Show world overview and session status
+description: Show world overview, health metrics, and active tensions
+allowed-tools:
+  - mcp__narra__query
+  - mcp__narra__session
 ---
 
-# Narra Status
+# World Status
 
-Show the current state of the narrative world and session.
+Show comprehensive world state: entity counts, embedding health, session context, and active tensions.
 
 ## Usage
 
 /narra:status
 
-## What It Shows
-
-- **World Overview**: Character, location, event, and scene counts
-- **Hot Entities**: Recently accessed entities (top 10)
-- **Pinned Entities**: Explicitly pinned for quick access
-- **Pending Decisions**: Deferred impact analysis decisions
-- **Session Info**: Last session time, data path
-
 ## Implementation
 
-Use the query tool with operation "overview" to get entity counts.
-Use the session tool with get_context operation to get hot entities and pending decisions.
+Run these queries in sequence and present a unified report:
 
-Present results in a clean summary format.
+1. **Overview**: `mcp__narra__query(operation="overview")` — entity counts by type
+2. **Session**: `mcp__narra__session(operation="get_context")` — pinned entities, recent accesses, pending decisions
+3. **Embedding Health**: `mcp__narra__query(operation="embedding_health")` — stale embeddings count
+4. **Tensions**: `mcp__narra__query(operation="unresolved_tensions")` — active narrative tensions
+
+Present results as a clean dashboard:
+
+```
+## World Status
+
+### Entities
+Characters: N | Locations: N | Events: N | Scenes: N
+
+### Session
+Pinned: [list] | Recent: [top 5] | Pending decisions: N
+
+### Health
+Embeddings: N/M up to date (X stale)
+
+### Active Tensions
+- [tension description] (characters involved, severity)
+```

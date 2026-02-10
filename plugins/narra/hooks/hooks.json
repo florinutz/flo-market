@@ -1,5 +1,5 @@
 {
-  "description": "Narra session hooks for context awareness",
+  "description": "Narra narrative co-pilot hooks: session awareness, mutation guardrails, auto-pinning, compaction safety",
   "hooks": {
     "SessionStart": [
       {
@@ -7,8 +7,54 @@
         "hooks": [
           {
             "type": "command",
-            "command": "echo '[Narra] World state available. Use narra MCP tools: query, mutate, session, export_world, generate_graph'",
+            "command": "${CLAUDE_PLUGIN_ROOT}/scripts/session-start.sh",
+            "timeout": 15
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "mcp__narra__mutate",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/scripts/pre-mutate.sh",
             "timeout": 5
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "mcp__narra__query",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '💡 Tip: Pin frequently-accessed entities with session(PinEntity) for faster context loading.'",
+            "timeout": 3
+          }
+        ]
+      },
+      {
+        "matcher": "mcp__narra__mutate",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '✓ Mutation complete. Consider: add relationships (CreateRelationship), record knowledge (RecordKnowledge), or validate (ValidateEntity).'",
+            "timeout": 3
+          }
+        ]
+      }
+    ],
+    "PreCompact": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/scripts/pre-compact.sh",
+            "timeout": 10
           }
         ]
       }
