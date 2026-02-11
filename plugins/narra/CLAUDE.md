@@ -13,9 +13,10 @@ When the user asks about **relationships** → use `query(operation="connection_
 ## Search Decision Tree
 
 - **Name or ID** → `query(operation="search", query="...")`
-- **Theme or concept** → `query(operation="semantic_search", query="...")`
-- **Name + concept mix** → `query(operation="hybrid_search", query="...")`
-- **Not sure** → use hybrid_search (works well for everything)
+- **Theme or concept** → `query(operation="unified_search", mode="semantic", query="...")`
+- **Name + concept mix** → `query(operation="unified_search", mode="hybrid", query="...")`
+- **Best precision needed** → `query(operation="unified_search", mode="reranked", query="...")`
+- **Not sure** → use `unified_search` with `mode="hybrid"` (works well for everything)
 
 ## Conventions
 
@@ -29,16 +30,24 @@ When the user asks about **relationships** → use `query(operation="connection_
 
 ### Most Useful Queries
 - `overview` — entity counts and world summary
-- `semantic_search` — find by meaning/theme
+- `unified_search` — search by meaning/theme/hybrid (`mode`: "semantic", "hybrid", "reranked")
 - `character_dossier` — full character profile
 - `scene_planning` — prep scene with character dynamics
 - `dramatic_irony_report` — knowledge asymmetries for drama
 - `unresolved_tensions` — active narrative tensions
 - `arc_history` — character arc trajectory over time
+- `detect_phases` — discover narrative phases via temporal-semantic clustering
+- `query_around` — find entities narratively close to an anchor
+- `detect_transitions` — identify entities bridging narrative phases
 
 ### Most Useful Mutations
 - `create_character` — with name, description, wound, desire, secret, contradiction
 - `create_relationship` — link two entities with type and description
 - `record_knowledge` — what a character knows/believes (with truth value)
+- `batch_record_knowledge` — batch knowledge recording
 - `update` — modify any entity field
 - `protect_entity` — prevent accidental deletion
+
+### Tips
+- Composite reports (`character_dossier`, `scene_planning`, `dramatic_irony_report`) accept `detail_level`: "summary", "standard", or "full"
+- Pass `token_budget` on any query to control response size (defaults: 4000 for composites, 2000 for searches, 1000 for lookups)

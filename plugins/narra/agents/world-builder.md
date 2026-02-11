@@ -46,7 +46,7 @@ mcp__narra__query(operation="overview")
 Get entity counts and a sense of the world's current state. Then search for thematically related entities:
 
 ```
-mcp__narra__query(operation="semantic_search", query="<themes from the user's description>", limit=10)
+mcp__narra__query(operation="unified_search", mode="semantic", query="<themes from the user's description>", limit=10)
 ```
 
 This prevents creating duplicates and reveals connection opportunities.

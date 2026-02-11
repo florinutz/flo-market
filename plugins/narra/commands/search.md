@@ -22,14 +22,18 @@ Analyze the query to pick the best search strategy:
 - An exact phrase: "blood oath"
 - An ID: "character:elena"
 
-**Semantic search** (`operation="semantic_search"`) — when the query is:
+**Semantic search** (`operation="unified_search", mode="semantic"`) — when the query is:
 - A theme or concept: "betrayal", "forbidden love"
 - A description: "characters hiding something"
 - A question: "who has the most secrets?"
 
-**Hybrid search** (`operation="hybrid_search"`) — when the query:
+**Hybrid search** (`operation="unified_search", mode="hybrid"`) — when the query:
 - Mixes names and concepts: "matei's secrets"
 - Could benefit from both: "events at the manor involving betrayal"
+
+**Reranked search** (`operation="unified_search", mode="reranked"`) — when you need best precision:
+- Complex queries where ranking quality matters most
+- Use when hybrid results need further refinement
 
 Always use `limit=10` by default. Present results with relevance scores when available.
 

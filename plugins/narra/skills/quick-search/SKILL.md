@@ -26,13 +26,13 @@ Analyze the user's search query: {{query}}
 2. **If the query is a theme, concept, or descriptive** (e.g., "betrayal", "characters hiding something", "forbidden love"):
    Use semantic search:
    ```
-   mcp__narra__query(operation="semantic_search", query="{{query}}", limit=10)
+   mcp__narra__query(operation="unified_search", mode="semantic", query="{{query}}", limit=10)
    ```
 
 3. **If the query mixes names and concepts** (e.g., "matei's secrets", "events at the manor"):
    Use hybrid search:
    ```
-   mcp__narra__query(operation="hybrid_search", query="{{query}}", limit=10)
+   mcp__narra__query(operation="unified_search", mode="hybrid", query="{{query}}", limit=10)
    ```
 
 **Present results** in a clean format:
